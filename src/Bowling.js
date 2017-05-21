@@ -3,13 +3,20 @@ function Game() {
   this.frames = [];
 }
 
-Game.prototype.frame = function(a, b) {
-  if (a > 10) { return 'error' };
-  if (b > 10) { return 'error' };
+Game.prototype.frame = function(first, second) {
+  if (first > 10) { return 'not possible' };
+  if (second > 10) { return 'not possible' };
+  if (this.frames.length >= 10) { return 'no more frames, end of game' };
 
-  frameScore = a + b;
-  this.frames.push(frameScore);
-  this.score += frameScore;
+  if (first === 10) {
+    frameScore = first;
+    this.frames.push(10);
+    return 'STRIKE!';
+  }
 
-  if (this.frames.length === 11) { return 'no more frames, end of game' };
+  else {
+    frameScore = first + second;
+    this.score += frameScore;
+    this.frames.push(frameScore);
+  };
 };

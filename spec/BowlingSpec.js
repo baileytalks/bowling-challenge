@@ -2,9 +2,10 @@ describe('Bowling', function() {
 
   var game = new Game();
   var newGame = new Game();
+  var strikeGame = new Game();
 
   it('no bowls can take down more than 10 pins', function() {
-    expect(game.frame(11,11)).toEqual('error');
+    expect(game.frame(11,11)).toEqual('not possible');
   });
 
   it('when bowl1 and bowl2 both equal 1, frame1 equals 2', function() {
@@ -29,5 +30,10 @@ describe('Bowling', function() {
       newGame.frame(1,1);
     };
     expect(newGame.frame(1,1)).toEqual('no more frames, end of game');
+  });
+
+  it('a frame where the first bowl is 10 is a strike', function() {
+    strikeGame.frame(10,5);
+    expect(strikeGame.frames[0]).toEqual(10);
   });
 });
